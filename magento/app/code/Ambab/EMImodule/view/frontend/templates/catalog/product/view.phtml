@@ -26,16 +26,16 @@ $data = $block->getCollection();
         
     </div>
     <div class="collapsibleContent" data-role="content">
-        <table id="emi">
+        <table id="emi" border=2>
             <thead>
                 <tr>
                     <!-- <th>ID</th> -->
-                    <th>Bank_Name</th>
-                    <!-- <th>Price</th> -->
                     <th>Month</th>
                     <th>ROI</th> 
                     <th>Amt per month</th> 
-                    <th>Final_Amount</th>
+                    <th>Product Price</th>
+                    <th>Total Interest</th>
+                    <th>Final Amount</th>
                 </tr>
             </thead>
             <tbody>
@@ -44,22 +44,19 @@ $data = $block->getCollection();
                     <?php $emiprice = $block->getEMI($Price, $emi['ROI'], $emi['month']); ?>
                     <?php $duration = $emi['month']; ?>
                     <?php $total = $emiprice * $duration; ?>
-                   <?php 
-                   $monthlyAmount = $total/ $duration;
-                   ?>
-                    <!-- // $interestPM = ($totalAmount - $currentProductPrice)/$duration; -->
+                   <?php $monthlyAmount = $total/ $duration;?>
                     <?php 
-                    // $interestPM = ($total - $currentProductPrice);
-                    ?>
-                   
+                    $interestPM = ($total - $Price)/$duration;
+                    $totalInterast = ($total - $Price);
+                    // echo $totalInterast; exit;?>
                     
-
                     <tr>
-                        <td><?php echo $emi['bank_name']; ?></td>
                         <td><?php echo $emi['month']; ?></td>
                         <td><?php echo $emi['ROI'] ."%"; ?></td>
-                        <td><?php echo round($monthlyAmount, 2)."$"; ?></td>
-                        <td><?php echo round($total, 2)."$"; ?></td>
+                        <td><?php echo "$".round($monthlyAmount, 2); ?></td>
+                        <td><?php echo "$".$Price; ?></td>
+                        <td><?php echo "$".$totalInterast; ?></td>
+                        <td><?php echo "<u><b>$".round($total, 2)."</b></u>"; ?></td>
                     </tr>
                     
                 </tbody>
@@ -139,3 +136,4 @@ $data = $block->getCollection();
 }
 </style>
 
+git config --global user.email "siddesh.more@ambab.com"

@@ -82,11 +82,11 @@ class View extends AbstractProduct
         return $collection;
     }
 
-    public function getEMI($Price, $interest_rate, $emi_plan)
+    public function getEMI($Price, $ROI, $month)
     {   
-        $interest_rate = $interest_rate / (12 * 100); 
-        $emi = ($Price * $interest_rate * pow(1 + $interest_rate, $emi_plan)) /  
-        (pow(1 + $interest_rate, $emi_plan) - 1); 
+        $ROI = $ROI / (12 * 100); 
+        $emi = ($Price * $ROI * pow(1 + $ROI, $month)) /  
+        (pow(1 + $ROI, $month) - 1); 
 
         return ($emi); 
     }
