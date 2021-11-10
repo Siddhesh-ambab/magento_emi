@@ -1,0 +1,141 @@
+<div id="emi"><a href="#">EMI Starts From Rs.489</a></div>
+
+<div id="popup-modal">
+    
+<?php
+
+$Price = $block->getProductPrize();
+// echo $Price;
+$bname = $block->getBank()
+    ->getData();
+$data = $block->getCollection();
+
+// print_r($bname);
+
+?>
+
+<div id="element" class="collapsibleContainer" data-mage-init='{"accordion":{"openedState": "active", "collapsible": true, "active": false, "multipleCollapsible": true}}'>
+
+ <?php //foreach ($data->getData() as $record): ?>
+
+    <?php foreach ($bname as $emi): ?>
+    <div class="collapsibleTab" data-role="collapsible">
+        <div data-role="trigger">
+                <span><?php echo $emi['bank_name']; ?></span>     
+        </div>
+        
+    </div>
+    <div class="collapsibleContent" data-role="content">
+        <table id="emi">
+            <thead>
+                <tr>
+                    <!-- <th>ID</th> -->
+                    <th>Bank_Name</th>
+                    <!-- <th>Price</th> -->
+                    <th>Month</th>
+                    <th>ROI</th> 
+                    <th>Amt per month</th> 
+                    <th>Final_Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($block->getEMI_Detail($emi['bank_name'])->getData() as $emi): ?>
+
+                    <?php $emiprice = $block->getEMI($Price, $emi['ROI'], $emi['month']); ?>
+                    <?php $duration = $emi['month']; ?>
+                    <?php $total = $emiprice * $duration; ?>
+                   <?php 
+                   $monthlyAmount = $total/ $duration;
+                   ?>
+                    <!-- // $interestPM = ($totalAmount - $currentProductPrice)/$duration; -->
+                    <?php 
+                    // $interestPM = ($total - $currentProductPrice);
+                    ?>
+                   
+                    
+
+                    <tr>
+                        <td><?php echo $emi['bank_name']; ?></td>
+                        <td><?php echo $emi['month']; ?></td>
+                        <td><?php echo $emi['ROI'] ."%"; ?></td>
+                        <td><?php echo round($monthlyAmount, 2)."$"; ?></td>
+                        <td><?php echo round($total, 2)."$"; ?></td>
+                    </tr>
+                    
+                </tbody>
+                <?php endforeach; ?>
+        </table>
+    </div>
+    <?php endforeach; ?>
+</div>
+</div>
+
+
+<script>
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function($,modal) 
+        {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: 'EMI STATUS',
+                buttons: [{
+                    text: $.mage.__('Close'),
+                    class: '',
+                    click: function () {
+                        this.closeModal();
+                    }
+                }]
+            };
+
+            // var popup = modal(options, $('#popup-modal'));
+
+            // $('#popup-modal').modal('openModal');
+
+            var popup = modal(options, $('#popup-modal'));
+            $("#emi").on('click',function()
+            {
+                $("#popup-modal").modal("openModal");
+            });
+        }
+    );
+
+    require([
+    'jquery',
+    'accordion'], function ($) {
+    $("#element").accordion();
+});
+
+</script>
+
+<style> 
+.collapsibleContainer{
+  border: 1px solid #ddd;
+  border-radius: 2px;
+}
+
+.collapsibleTab{
+  background: #eee;
+  padding: 5px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+  &:first-child {
+    border-bottom: 1px solid #ddd;
+  }
+  &:nth-last-child(2) {
+    border-top: 1px solid #ddd;
+  }
+}
+
+.collapsibleContent {
+  padding: 1rem 2rem;
+}
+</style>
+
