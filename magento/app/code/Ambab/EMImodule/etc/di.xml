@@ -34,4 +34,12 @@
             </argument>
         </arguments>
     </type>
+<!-- 
+    <type name="Magento\Payment\Model\CcGenericConfigProvider">
+        <arguments>
+            <argument name="methodCodes" xsi:type="array">
+                <item name="ambab_emiPayment" xsi:type="const">Ambab\EMImodule\Model\EmiPayment::CODE</item>
+            </argument>
+        </arguments>
+    </type> -->
 </config>
