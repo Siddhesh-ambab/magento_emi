@@ -2,7 +2,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceBlock name="product.info.main">
-             <block class="Ambab\EMImodule\Block\Catalog\Product\View" ifconfig="aureatelabs/general/emi" name="catalog.product.view" after="product.info.price" template="Ambab_EMImodule::catalog/product/view.phtml"/>
+                        <block class="Ambab\EMImodule\Block\Catalog\Product\View" ifconfig="aureatelabs/general/emi" name="catalog.product.view" after="product.info.price" template="Ambab_EMImodule::catalog/product/view.phtml"/>
         </referenceBlock>s
     </body>
 </page>
