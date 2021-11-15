@@ -64,7 +64,6 @@ class AllemiRepository implements AllemiRepositoryInterface
     {
 		$emi = $this->allemiFactory->create();
         $emi->load($id);
-        // print_r($emi); exit;
         if (!$emi->getId()) {
             throw new NoSuchEntityException(__('emi with id "%1" does not exist.', $id));
         }

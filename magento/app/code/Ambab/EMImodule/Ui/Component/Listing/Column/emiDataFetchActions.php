@@ -9,38 +9,20 @@ use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
 
-/**
- * Class AllnewsActions
- */
+
 class emiDataFetchActions extends Column
 {
     /** Url path */
     const CMS_URL_PATH_EDIT = 'emical/emi/edit';
     const CMS_URL_PATH_DELETE = 'emical/emi/delete';
 
-    /**
-     * @var \Magento\Framework\UrlInterface
-     */
     protected $urlBuilder;
 
-    /**
-     * @var string
-     */
     private $editUrl;
 
-    /**
-     * @var Escaper
-     */
     private $escaper;
 
-    /**
-     * @param ContextInterface $context
-     * @param UiComponentFactory $uiComponentFactory
-     * @param UrlInterface $urlBuilder
-     * @param array $components
-     * @param array $data
-     * @param string $editUrl
-     */
+    
     public function __construct(
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
@@ -54,12 +36,6 @@ class emiDataFetchActions extends Column
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
 
-    /**
-     * Prepare Data Source
-     *
-     * @param array $dataSource
-     * @return array
-     */
     public function prepareDataSource(array $dataSource)
     {
         if (isset($dataSource['data']['items'])) {

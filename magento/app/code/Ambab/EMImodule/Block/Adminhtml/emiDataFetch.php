@@ -5,13 +5,13 @@ class emiDataFetch extends \Magento\Backend\Block\Widget\Grid\Container
 {
     protected function _construct()
     {
-        $this->_controller = 'adminhtml_EMI';
-        $this->_blockGroup = 'emi_options';
+        $this->_controller = 'adminhtml_emi';
+        $this->_blockGroup = 'Ambab_EMImodule';
         $this->_headerText = __('Manage emi');
 
         parent::_construct();
 
-        if ($this->_isAllowedAction('emi_options::save')) {
+        if ($this->_isAllowedAction('Ambab_EMImodule::save')) {
             $this->buttonList->update('add', 'label', __('Add emi'));
         } else {
             $this->buttonList->remove('add');

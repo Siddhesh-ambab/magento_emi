@@ -1,6 +1,6 @@
 <?php
 
-namespace Ambab\EMImodule\Controller\Adminhtml\Allemi;
+namespace Ambab\EMImodule\Controller\Adminhtml\EMI;
 
 use Magento\Backend\App\Action;
 use Ambab\EMImodule\Model\emiDataFetch;
@@ -41,7 +41,7 @@ class Save extends \Magento\Backend\App\Action
      */
 	protected function _isAllowed()
 	{
-		return $this->_authorization->isAllowed('emi_options::save');
+		return $this->_authorization->isAllowed('Ambab_EMImodule::save');
 	}
 
     /**
@@ -53,7 +53,7 @@ class Save extends \Magento\Backend\App\Action
     public function execute()
     {
         $data = $this->getRequest()->getPostValue();
-        print_r($data); exit;
+        // print_r($data); exit;
 
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
         $resultRedirect = $this->resultRedirectFactory->create();
@@ -78,15 +78,15 @@ class Save extends \Magento\Backend\App\Action
 
             $model->setData($data);
 
-            // $this->_eventManager->dispatch(
-            //     'news_allnews_prepare_save',
-            //     ['allnews' => $model, 'request' => $this->getRequest()]
-            // );
+            $this->_eventManager->dispatch(
+                'emical_emi_prepare_save',
+                ['emi' => $model, 'request' => $this->getRequest()]
+            );
 
             try {
                 $this->allemiRepository->save($model);
                 $this->messageManager->addSuccessMessage(__('You saved the emi.'));
-                $this->dataPersistor->clear('emical_EMI');
+                $this->dataPersistor->clear('emical_emi');
                 if ($this->getRequest()->getParam('back')) {
                     return $resultRedirect->setPath('*/*/edit', ['id' => $model->getId(), '_current' => true]);
                 }
@@ -97,7 +97,7 @@ class Save extends \Magento\Backend\App\Action
                 $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the emi.'));
             }
 
-            $this->dataPersistor->set('emical_EMI', $data);
+            $this->dataPersistor->set('emical_emi', $data);
             return $resultRedirect->setPath('*/*/edit', ['id' => $this->getRequest()->getParam('id')]);
         }
         return $resultRedirect->setPath('*/*/');

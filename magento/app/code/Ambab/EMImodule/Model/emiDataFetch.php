@@ -17,7 +17,7 @@ class emiDataFetch extends AbstractModel implements AllemiInterface, IdentityInt
     const STATUS_DISABLED = 0;
     
     
-    const CACHE_TAG = 'emi_options';
+    const CACHE_TAG = 'ambab_emical';
 	
 	//Unique identifier for use within caching
 	protected $_cacheTag = self::CACHE_TAG;

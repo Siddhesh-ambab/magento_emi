@@ -27,7 +27,7 @@ class NewAction extends \Magento\Backend\App\Action
      */
 	protected function _isAllowed()
 	{
-		return $this->_authorization->isAllowed('emi_options::save');
+		return $this->_authorization->isAllowed('Ambab_EMImodule::save');
 	}
 
     /**

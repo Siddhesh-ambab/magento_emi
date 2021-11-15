@@ -7,9 +7,9 @@ class Collection extends AbstractCollection
 {
     protected $_idFieldName = 'id';
 	
-	protected $_eventPrefix = 'emical_emi_grid_collection';
+	protected $_eventPrefix = 'emical_emi_collection';
 
-    protected $_eventObject = 'emical_emi_collection';
+    protected $_eventObject = 'emi_collection';
 	
 	/**
      * Define model & resource model
