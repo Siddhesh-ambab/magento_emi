@@ -1,3 +1,63 @@
 <div id="popup" style="display: none;"> 
    <?php echo $this->getChildHtml('popup-content') ?> 
+
+
+
+<?php
+
+$blockObj= $block->getLayout()->createBlock('Ambab\EMImodule\Block\Catalog\Product\View');
+$bank = $blockObj->getBank();
+$Price = $blockObj->getSubtotal();
+
+?>
+
+
+
+
+<div id="element" class="collapsibleContainer" data-mage-init='{"accordion":{"openedState": "active", "collapsible": true, "active": false, "multipleCollapsible": true}}'>
+    <?php foreach ($bank as $emi): ?>
+    <div class="collapsibleTab" data-role="collapsible">
+        <div data-role="trigger">
+                <span><?php echo $emi['bank_name']; ?></span>     
+        </div>
+        
+    </div>
+    <div class="collapsibleContent" data-role="content">
+        <table id="emi" class="table" border=2>
+        <thead>
+            <tr>
+                <th>month</th>
+                <th>ROI(PA)</th> 
+                <th>Final_Amount</th>
+            </tr>
+        </thead>
+    <tbody>
+        <?php foreach ($blockObj->getEMI_Detail($emi['bank_name'])->getData() as $emi): ?>
+
+            <?php $emiprice = $blockObj->getEMI($Price, $emi['ROI'], $emi['month']); ?>
+            <?php $total = $emiprice *$emi['month']; ?>
+            <?php $plan = round($total/$emi['month'],2);?>
+            <?php $interest = $total - $Price ;?>
+            <tr>
+                 <td><?php 
+                 echo $plan ."$ x ". $emi['month'] ."m" ?> </td>
+                 <td><?php 
+                 echo round($interest,2) ."$"." (".$emi['month']."%".")"?></td> 
+                 <td><?php 
+                 echo round($total, 2) ."$" ?></td>
+                
+            </tr>
+            
+            <?php
+        endforeach; ?>
+        </tbody>
+        </table>
+      
+    </div>
+    <?php endforeach; ?>
+    
+  </div>
+
+</div>
+
 </div>

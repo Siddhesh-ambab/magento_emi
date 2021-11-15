@@ -10,15 +10,18 @@ class View extends AbstractProduct
     protected $_product;
     protected $_emiDataFetchFactory;
     protected $registry;
+    protected $subtotal;
 
     public function __construct(Context $context, 
-    array $data,
+    array $data=[],
     \Magento\Framework\Registry $registry,
-    emiDataFetchFactory $emiDataFetchFactory
+    emiDataFetchFactory $emiDataFetchFactory,
+    \Magento\Checkout\Model\Cart $subtotal
     )
     {
         $this->_emiDataFetchFactory = $emiDataFetchFactory;
         $this->registry = $registry;
+        $this->subtotal = $subtotal;
         // $this->productFactory = $productFactory;
         parent::__construct($context, $data);
     }
@@ -102,6 +105,10 @@ class View extends AbstractProduct
         return $collection;
     }
 
+    public function getSubtotal()
+    {
+        return $this->subtotal->getQuote()->getBaseSubtotal();
+    }    
 
 
 }

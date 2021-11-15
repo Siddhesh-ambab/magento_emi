@@ -24,7 +24,7 @@
                 title: $.mage.__('PopUp'), 
                 modalClass: 'popup', 
                 buttons: [{ 
-                   text: $.mage.__('Yes, I got you!'), 
+                   text: $.mage.__('Got it..'), 
                    class: '', 
                    click: function () { 
                       this.closeModal(); 
