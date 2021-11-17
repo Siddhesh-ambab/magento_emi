@@ -2,28 +2,28 @@
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 
-<preference for="Ambab\EMImodule\Api\Data\AllemiInterface" type="Ambab\EMImodule\Model\emiDataFetch" />
+<preference for="Ambab\EMImodule\Api\Data\AllemiInterface" type="Ambab\EMImodule\Model\EmiDataFetch" />
 <preference for="Ambab\EMImodule\Api\AllemiRepositoryInterface" type="Ambab\EMImodule\Model\AllemiRepository" />
 	
 <virtualType name="AllemiGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
 
  <arguments>
-            <argument name="collection" xsi:type="object" shared="false">Ambab\EMImodule\Model\ResourceModel\emiDataFetch\Collection</argument>
+            <argument name="collection" xsi:type="object" shared="false">Ambab\EMImodule\Model\ResourceModel\EmiDataFetch\Collection</argument>
         </arguments>
     </virtualType>
 	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="emical_emi_listing_data_source" xsi:type="string">Ambab\EMImodule\Model\ResourceModel\emiDataFetch\Grid\Collection</item>
+                <item name="emical_emi_listing_data_source" xsi:type="string">Ambab\EMImodule\Model\ResourceModel\EmiDataFetch\Grid\Collection</item>
             </argument>
         </arguments>
     </type>
-    <type name="Ambab\EMImodule\Model\ResourceModel\emiDataFetch\Grid\Collection">
+    <type name="Ambab\EMImodule\Model\ResourceModel\EmiDataFetch\Grid\Collection">
         <arguments>
             <argument name="mainTable" xsi:type="string">emi_options</argument>
             <argument name="eventPrefix" xsi:type="string">emical_emi_grid_collection</argument>
             <argument name="eventObject" xsi:type="string">emical_emi_collection</argument>
-            <argument name="resourceModel" xsi:type="string">Ambab\EMImodule\Model\ResourceModel\emiDataFetch</argument>
+            <argument name="resourceModel" xsi:type="string">Ambab\EMImodule\Model\ResourceModel\EmiDataFetch</argument>
         </arguments>
     </type>
 

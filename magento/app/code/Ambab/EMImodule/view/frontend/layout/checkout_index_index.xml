@@ -3,8 +3,6 @@
     <head>
         <css src="Ambab_EMImodule::css/checkout.css" />
     </head>
-    
-    
     <body> 
         <referenceBlock name="checkout.root"> 
             <arguments> 

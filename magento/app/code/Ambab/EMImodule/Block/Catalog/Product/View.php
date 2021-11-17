@@ -2,7 +2,7 @@
 namespace Ambab\EMImodule\Block\Catalog\Product;
 use Magento\Catalog\Block\Product\Context;
 use Magento\Catalog\Block\Product\AbstractProduct;
-use Ambab\EMImodule\Model\emiDataFetchFactory;
+use Ambab\EMImodule\Model\EmiDataFetchFactory;
 
 
 class View extends AbstractProduct
@@ -15,7 +15,7 @@ class View extends AbstractProduct
     public function __construct(Context $context, 
     array $data=[],
     \Magento\Framework\Registry $registry,
-    emiDataFetchFactory $emiDataFetchFactory,
+    EmiDataFetchFactory $emiDataFetchFactory,
     \Magento\Checkout\Model\Cart $subtotal
     )
     {

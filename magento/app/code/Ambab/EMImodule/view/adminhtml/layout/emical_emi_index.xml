@@ -5,8 +5,6 @@
 	</head>
 	<body>
 		<referenceContainer name="content">
-			<!-- <block class="Magento\Backend\Block\Template" template="Ambab_EMImodule::emi.phtml"/> -->
-			
 			<uiComponent name="emical_emi_listing"/>
 		</referenceContainer>
 	</body>

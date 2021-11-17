@@ -9,8 +9,8 @@ use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Reflection\DataObjectProcessor;
-use Ambab\EMImodule\Model\ResourceModel\emiDataFetch as ResourceAllemi;
-use Ambab\EMImodule\Model\ResourceModel\emiDataFetch\CollectionFactory as AllemiCollectionFactory;
+use Ambab\EMImodule\Model\ResourceModel\EmiDataFetch as ResourceAllemi;
+use Ambab\EMImodule\Model\ResourceModel\EmiDataFetch\CollectionFactory as AllemiCollectionFactory;
 use Magento\Store\Model\StoreManagerInterface;
 
 class AllemiRepository implements AllemiRepositoryInterface

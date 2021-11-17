@@ -1,7 +1,7 @@
 <?php
 namespace Ambab\EMImodule\Block\Adminhtml;
 
-class emiDataFetch extends \Magento\Backend\Block\Widget\Grid\Container
+class EmiDataFetch extends \Magento\Backend\Block\Widget\Grid\Container
 {
     protected function _construct()
     {

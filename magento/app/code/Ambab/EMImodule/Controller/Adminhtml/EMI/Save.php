@@ -3,104 +3,54 @@
 namespace Ambab\EMImodule\Controller\Adminhtml\EMI;
 
 use Magento\Backend\App\Action;
-use Ambab\EMImodule\Model\emiDataFetch;
+use Ambab\EMImodule\Model\EmiDataFetch;
 use Magento\Framework\App\Request\DataPersistorInterface;
 use Magento\Framework\Exception\LocalizedException;
 
 class Save extends \Magento\Backend\App\Action
 {
-    /**
-     * @var DataPersistorInterface
-     */
-    protected $dataPersistor;
 
-   
-    private $emiDataFetchFactory;
-
-    
-    private $allemiRepository;
+    var $emiDataFetchFactory;
 
     public function __construct(
-        Action\Context $context,
-        DataPersistorInterface $dataPersistor,
-        \Ambab\EMImodule\Model\emiDataFetchFactory $emiDataFetchFactory = null,
-        \Ambab\EMImodule\Api\AllemiRepositoryInterface $allemiRepository = null
+        \Magento\Backend\App\Action\Context $context,
+        \Ambab\EMImodule\Model\EmiDataFetchFactory $emiDataFetchFactory
     ) {
-        $this->dataPersistor = $dataPersistor;
-        $this->emiDataFetchFactory = $emiDataFetchFactory
-            ?: \Magento\Framework\App\ObjectManager::getInstance()->get(\Ambab\EMImodule\Model\emiDataFetchFactory::class);
-        $this->allemiRepository = $allemiRepository
-            ?: \Magento\Framework\App\ObjectManager::getInstance()->get(\Ambab\EMImodule\Api\AllemiRepositoryInterface::class);
         parent::__construct($context);
+        $this->emiDataFetchFactory = $emiDataFetchFactory;
     }
-	
-	/**
-     * Authorization level
-     *
-     * @see _isAllowed()
-     */
-	protected function _isAllowed()
-	{
-		return $this->_authorization->isAllowed('Ambab_EMImodule::save');
-	}
 
     /**
-     * Save action
-     *
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @SuppressWarnings(PHPMD.NPathComplexity)
      */
     public function execute()
     {
         $data = $this->getRequest()->getPostValue();
-        // print_r($data); exit;
-
-        /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
-        $resultRedirect = $this->resultRedirectFactory->create();
-        if ($data) 
-        {
-            if (empty($data['id'])) {
-                $data['id'] = null;
-            }
-
-            
-            $model = $this->emiDataFetchFactory->create();
-
-            $id = $this->getRequest()->getParam('id');
-            if ($id) {
-                try {
-                    $model = $this->allemiRepository->getById($id);
-                } catch (LocalizedException $e) {
-                    $this->messageManager->addErrorMessage(__('This emi no longer exists.'));
-                    return $resultRedirect->setPath('*/*/');
-                }
-            }
-
-            $model->setData($data);
-
-            $this->_eventManager->dispatch(
-                'emical_emi_prepare_save',
-                ['emi' => $model, 'request' => $this->getRequest()]
-            );
-
-            try {
-                $this->allemiRepository->save($model);
-                $this->messageManager->addSuccessMessage(__('You saved the emi.'));
-                $this->dataPersistor->clear('emical_emi');
-                if ($this->getRequest()->getParam('back')) {
-                    return $resultRedirect->setPath('*/*/edit', ['id' => $model->getId(), '_current' => true]);
-                }
-                return $resultRedirect->setPath('*/*/');
-            } catch (LocalizedException $e) {
-                $this->messageManager->addExceptionMessage($e->getPrevious() ?:$e);
-            } catch (\Exception $e) {
-                $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the emi.'));
-            }
-
-            $this->dataPersistor->set('emical_emi', $data);
-            return $resultRedirect->setPath('*/*/edit', ['id' => $this->getRequest()->getParam('id')]);
+        if (!$data) {
+            $this->_redirect('emical/emi/addrow');
+            return;
         }
-        return $resultRedirect->setPath('*/*/');
+        try {
+            $rowData = $this->emiDataFetchFactory->create();
+            $rowData->setData($data);
+            if (isset($data['id'])) {
+                $rowData->setId($data['id']);
+            }
+            $rowData->save();
+            $this->messageManager->addSuccess(__('Row data has been successfully saved.'));
+        } catch (\Exception $e) {
+            $this->messageManager->addError(__($e->getMessage()));
+        }
+        $this->_redirect('emical/emi/index');
+    }
+
+    /**
+     * @return bool
+     */
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed('Ambab_EMIModule::save');
     }
 }
 ?>

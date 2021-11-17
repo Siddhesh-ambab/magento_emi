@@ -1,10 +1,10 @@
 <?php
 
-namespace Ambab\EMImodule\Model\ResourceModel\emiDataFetch\Grid;
+namespace Ambab\EMImodule\Model\ResourceModel\EmiDataFetch\Grid;
 
 use Magento\Framework\Api\Search\SearchResultInterface;
 use Magento\Framework\Api\Search\AggregationInterface;
-use Ambab\EMImodule\Model\ResourceModel\emiDataFetch\Collection as emiCollection;
+use Ambab\EMImodule\Model\ResourceModel\EmiDataFetch\Collection as emiCollection;
 
 /**
  * Class Collection
