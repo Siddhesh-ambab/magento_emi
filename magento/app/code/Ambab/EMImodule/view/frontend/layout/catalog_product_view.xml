@@ -3,6 +3,6 @@
     <body>
         <referenceBlock name="product.info.main">
                         <block class="Ambab\EMImodule\Block\Catalog\Product\View" ifconfig="aureatelabs/general/emi" name="catalog.product.view" after="product.info.price" template="Ambab_EMImodule::catalog/product/view.phtml"/>
-        </referenceBlock>s
+        </referenceBlock>
     </body>
 </page>
