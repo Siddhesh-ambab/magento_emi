@@ -4,5 +4,11 @@
     <menu>
     	<add id="Ambab_EMImodule::manager" title="EMI Options" module="Ambab_EMImodule" sortOrder="10" resource="Ambab_EMImodule::manager"/>
     	<add id="Ambab_EMImodule::add_row" title="ADMIN GRID" module="Ambab_EMImodule" sortOrder="20" parent="Ambab_EMImodule::manager" action="emical/emi/index" resource="Ambab_EMImodule::add_row"/>
+
+        <add id="Ambab_EMImodule::emicalc_configuration" title="Configuration" 
+        module="Ambab_EMImodule" 
+        sortOrder="30" 
+        parent="Ambab_EMImodule::manager" 
+        action="adminhtml/system_config/edit/section/emied" resource="Ambab_EMImodule::emicalc_configuration"/>
     </menu>
 </config>
