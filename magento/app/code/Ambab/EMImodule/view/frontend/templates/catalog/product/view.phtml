@@ -1,4 +1,3 @@
-<div id="emi"><a href="#">EMI Starts From Rs.489</a></div>
 
 <div id="popup-modal">
     
@@ -39,7 +38,10 @@ $data = $block->getCollection();
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($block->getEMI_Detail($emi['bank_name'])->getData() as $emi): ?>
+
+                <?php 
+                $minvalue = [];
+                foreach ($block->getEMI_Detail($emi['bank_name'])->getData() as $emi): ?>
 
                     <?php $emiprice = $block->getEMI($Price, $emi['ROI'], $emi['month']); ?>
                     <?php $duration = $emi['month']; ?>
@@ -48,6 +50,7 @@ $data = $block->getCollection();
                     <?php 
                     $interestPM = ($total - $Price)/$duration;
                     $totalInterast = ($total - $Price);
+                    array_push($minvalue,$monthlyAmount);
                     // echo $totalInterast; exit;?>
                     
                     <tr>
@@ -67,6 +70,11 @@ $data = $block->getCollection();
 </div>
 </div>
 
+<div id="emi"><a href="#">EMI Starts From $
+<?php
+    echo round(min($minvalue),2);
+?></a>
+</div>
 
 <script>
     require(
