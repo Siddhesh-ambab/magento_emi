@@ -107,7 +107,7 @@ class View extends AbstractProduct
 
     public function getSubtotal()
     {
-        return $this->subtotal->getQuote()->getBaseSubtotal();
+        return $this->subtotal->getQuote()->getGrandTotal();
     }    
 
 
