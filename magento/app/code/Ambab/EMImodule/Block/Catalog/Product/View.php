@@ -3,6 +3,7 @@ namespace Ambab\EMImodule\Block\Catalog\Product;
 use Magento\Catalog\Block\Product\Context;
 use Magento\Catalog\Block\Product\AbstractProduct;
 use Ambab\EMImodule\Model\EmiDataFetchFactory;
+use Ambab\EMImodule\Helper\Data;
 
 
 class View extends AbstractProduct
@@ -11,17 +12,22 @@ class View extends AbstractProduct
     protected $_emiDataFetchFactory;
     protected $registry;
     protected $subtotal;
+    protected $helper;
+
 
     public function __construct(Context $context, 
     array $data=[],
     \Magento\Framework\Registry $registry,
     EmiDataFetchFactory $emiDataFetchFactory,
-    \Magento\Checkout\Model\Cart $subtotal
+    \Magento\Checkout\Model\Cart $subtotal,
+    Data $helper
     )
     {
         $this->_emiDataFetchFactory = $emiDataFetchFactory;
         $this->registry = $registry;
         $this->subtotal = $subtotal;
+        $this->helper = $helper;
+
         // $this->productFactory = $productFactory;
         parent::__construct($context, $data);
     }
@@ -110,6 +116,10 @@ class View extends AbstractProduct
         return $this->subtotal->getQuote()->getGrandTotal();
     }    
 
+    public function isEnable()
+    {
+        return $this->helper->getModuleConfig();
+    }    
 
 }
 

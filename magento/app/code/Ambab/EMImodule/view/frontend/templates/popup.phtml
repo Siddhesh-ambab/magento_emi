@@ -8,7 +8,7 @@
 $blockObj= $block->getLayout()->createBlock('Ambab\EMImodule\Block\Catalog\Product\View');
 $bank = $blockObj->getBank();
 $Price = $blockObj->getSubtotal();
-
+$enable= $blockObj->isEnable();
 ?>
 
 
@@ -61,3 +61,7 @@ $Price = $blockObj->getSubtotal();
 </div>
 
 </div>
+
+<script>
+    var isEnable = <?php echo json_encode($enable);?>;
+</script>
