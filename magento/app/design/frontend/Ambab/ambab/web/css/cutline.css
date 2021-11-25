@@ -1,0 +1,4 @@
+.product-options-bottom .price-box .old-price, .product-info-price .price-box .old-price{
+    text-decoration: line-through;
+    color: red;
+}

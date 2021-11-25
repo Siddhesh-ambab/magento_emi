@@ -2,6 +2,8 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"> 
 <head>
 <css src="Ambab_EMImodule::css/checkout.css" />
+<script src="Ambab_EMImodule::js/ajax.js" />
+
 </head>
     <body>
         <referenceBlock name="checkout.root">
