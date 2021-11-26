@@ -2,3 +2,10 @@
     text-decoration: line-through;
     color: red;
 }
+
+.custom_wishlist{
+    position: absolute;
+    top: 284px;
+    left: 98px;
+    z-index: 1;
+}

@@ -4,6 +4,7 @@ use Magento\Catalog\Block\Product\Context;
 use Magento\Catalog\Block\Product\AbstractProduct;
 use Ambab\EMImodule\Model\EmiDataFetchFactory;
 use Ambab\EMImodule\Helper\Data;
+use \Magento\Framework\App\Config\ScopeConfigInterface;
 
 
 class View extends AbstractProduct
@@ -13,6 +14,8 @@ class View extends AbstractProduct
     protected $registry;
     protected $subtotal;
     protected $helper;
+    protected $adminSubtotal;
+
 
 
     public function __construct(Context $context, 
@@ -20,6 +23,7 @@ class View extends AbstractProduct
     \Magento\Framework\Registry $registry,
     EmiDataFetchFactory $emiDataFetchFactory,
     \Magento\Checkout\Model\Cart $subtotal,
+    ScopeConfigInterface $adminSubtotal,
     Data $helper
     )
     {
@@ -27,6 +31,8 @@ class View extends AbstractProduct
         $this->registry = $registry;
         $this->subtotal = $subtotal;
         $this->helper = $helper;
+        $this->adminSubtotal = $adminSubtotal;
+
 
         // $this->productFactory = $productFactory;
         parent::__construct($context, $data);
@@ -121,6 +127,10 @@ class View extends AbstractProduct
         return $this->helper->getModuleConfig();
     }    
 
+    public function minimumAmt()
+    {
+        return $this->adminSubtotal->getValue('sales/minimum_order/amount');
+    } 
 }
 
 ?>
