@@ -5,6 +5,8 @@ use Magento\Catalog\Block\Product\AbstractProduct;
 use Ambab\EMImodule\Model\EmiDataFetchFactory;
 use Ambab\EMImodule\Helper\Data;
 use \Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\CatalogInventory\Api\StockRegistryInterface;
+use Magento\InventorySalesAdminUi\Model\GetSalableQuantityDataBySku; 
 
 
 class View extends AbstractProduct
@@ -15,7 +17,8 @@ class View extends AbstractProduct
     protected $subtotal;
     protected $helper;
     protected $adminSubtotal;
-
+    protected $left;
+    protected $sku;
 
 
     public function __construct(Context $context, 
@@ -24,7 +27,9 @@ class View extends AbstractProduct
     EmiDataFetchFactory $emiDataFetchFactory,
     \Magento\Checkout\Model\Cart $subtotal,
     ScopeConfigInterface $adminSubtotal,
-    Data $helper
+    Data $helper,
+    StockRegistryInterface $left,
+    GetSalableQuantityDataBySku $sku
     )
     {
         $this->_emiDataFetchFactory = $emiDataFetchFactory;
@@ -32,7 +37,8 @@ class View extends AbstractProduct
         $this->subtotal = $subtotal;
         $this->helper = $helper;
         $this->adminSubtotal = $adminSubtotal;
-
+        $this->left = $left;
+        $this->sku = $sku;
 
         // $this->productFactory = $productFactory;
         parent::__construct($context, $data);
@@ -131,6 +137,18 @@ class View extends AbstractProduct
     {
         return $this->adminSubtotal->getValue('sales/minimum_order/amount');
     } 
+
+    public function getLeftStock($productId)
+    {
+      $stock =  $this->left->getStockItem($productId);
+      return $stock->getQty();
+    }
+
+    public function getProductSalableQty($sku)
+    {
+        $salable = $this->sku->execute($sku);
+        return $salable[0]['qty'];
+    }
 }
 
 ?>
