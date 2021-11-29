@@ -44,14 +44,13 @@ if ($_attributeType && $_attributeType == 'text') {
     <div class="value" <?= /* @noEscape */ $_attributeAddAttribute ?>><?= /* @noEscape */ $_attributeValue ?></div>
 
     <?php if ($_product->getHot()) : ?>
-        <span style="font-size: 20px; color: red;">This is HOT product</span>
+        <br><span style="font-size: 20px; color: red;">This is HOT product</span>
     <?php endif; ?>
 
     <strong>
         <br>
-        <span style="font-size: 20px; color: green;"><?= $Quantity ?></span>
-        <span> Units left</span>
+        <span style="font-size: 20px; color: green;"><?= $Quantity ?>
+        Units left</span>
     </strong>
- 
 </div>
 <?php endif; ?>
